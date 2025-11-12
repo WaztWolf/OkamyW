@@ -1,0 +1,67 @@
+JavaScript → discord.js
+Bienvenidas/Despedidas
+Niveles Texto
+Niveles Llamada
+Registros (Edicion mensaje, eliminar mensaje, reaccion añadir/eliminar, etc)
+Comando para hablar desde el bot, solo admins del bot en general
+Comandos Varios(por agregar)
+Todo guardado en base de datos:
+nameid es el Name+ID del server, cada tabla estas son para cada servidor, cada cuando se une a un servidor, se crea esto en la base de datos
+CREATE TABLE IF NOT EXISTS SERVER_nameid_config 
+  serverid TEXT PRIMARY KEY,
+  goodbyeChannel TEXT,
+  welcomeChannel TEXT,
+  levelsChannel TEXT,
+  registersChannel TEXT,
+  serverPrefix TEXT DEFAULT 'W!',
+  FOREIGN KEY (serverid) REFERENCES bot_members(serverid)
+	
+Tabla General:
+CREATE TABLE IF NOT EXISTS BotInfo 
+  botId INTEGER PRIMARY KEY,
+  botVersion TEXT,
+  botName TEXT,
+  botPrefix TEXT,
+  botToken TEXT,
+  authorID TEXT,
+  authorName TEXT
+Tabla Miembros:
+CREATE TABLE IF NOT EXISTS bot_members 
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  serverid TEXT,
+  userID TEXT,
+  name TEXT,
+  level_text INT DEFAULT 0,
+  xp_text INT DEFAULT 0,
+  xp_nextLevel_text INT DEFAULT 100,
+  level_voice INT DEFAULT 0,
+  xp_voice INT DEFAULT 0,
+  xp_nextLevel_voice INT DEFAULT 100
+
+
+
+
+
+
+
+
+Estructura del proyecto:
+OkamyWBot
+node_modules/*
+utils/
+TableMaker.js (crea las tablas en db)
+LevelSystem.js
+WelcomeSystem.js
+GoobyeSystem.js
+AdminCommands.js
+commands/
+… commands for add.js
+index.js → Setup del bot, de la base de datos
+command_handler.js
+… other things.js
+
+PanelWeb:
+onrender.com
+Configurar Servers
+Iniciar Sesion con Discord
+Owned Servers → Dashboard donde configurar y todo eso
